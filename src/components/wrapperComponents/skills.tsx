@@ -12,6 +12,7 @@ const SkillsWrapper = styled(InnerWrapper)`
   box-sizing: border-box;
   padding: 40px;
   display: flex;
+  overflow-x: hidden;
   flex-direction: row;
   align-items: center;
   justify-content: space-around;
