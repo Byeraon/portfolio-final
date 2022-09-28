@@ -61,11 +61,11 @@ export const WorkComponent: React.FC<WorkComponentProps> = ({
     <WorkComponentWrapper
       style={{ animationDelay: `${delay}s` }}
       onClick={
-        typeof url !== "boolean"
-          ? () => {
+        typeof url === "boolean"
+          ? () => {}
+          : () => {
               window.open(url, "_blank");
             }
-          : () => {}
       }
     >
       <TitleWork style={url === false ? { color: "#a3a3a3" } : {}}>
