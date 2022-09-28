@@ -2,28 +2,27 @@ import React, { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import { BlockWrapper } from "./components/blockwrapper";
-import { CursorContext } from "./components/context/cursorContext";
+import { Provider } from "./components/context/cursorContext";
 import { Menu } from "./components/menu";
 import { PhotoWrapper } from "./components/photowrapper";
 
 function App() {
   const [cursorTransition, setCursor] = useState({ x: 0, y: 0 });
 
+  const onMouseMove = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    if (window.innerWidth > 767) {
+      setCursor({
+        x: (event.clientX - window.innerWidth / 2) / 50,
+        y: (event.clientY - window.innerWidth / 2) / 50,
+      });
+    } else {
+      setCursor({ x: 0, y: 0 });
+    }
+  };
+
   return (
-    <CursorContext.Provider value={{ cursorTransition: cursorTransition }}>
-      <div
-        onMouseMove={(event) => {
-          if (window.innerWidth > 767) {
-            setCursor({
-              x: (event.clientX - window.innerWidth / 2) / 50,
-              y: (event.clientY - window.innerWidth / 2) / 50,
-            });
-          } else {
-            setCursor({ x: 0, y: 0 });
-          }
-        }}
-        className="App"
-      >
+    <Provider value={{ cursorTransition: cursorTransition }}>
+      <div onMouseMove={onMouseMove} className="App">
         <Menu />
         <PhotoWrapper />
 
@@ -37,7 +36,7 @@ function App() {
           ></Route>
         </Routes>
       </div>
-    </CursorContext.Provider>
+    </Provider>
   );
 }
 

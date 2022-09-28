@@ -100,7 +100,6 @@ const BottleWater = styled.div`
 `;
 
 export const Bottle: React.FC<BottleProps> = ({
-  id,
   name,
   percent,
   waterColor,

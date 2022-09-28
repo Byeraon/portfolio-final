@@ -52,7 +52,6 @@ const TagsWork = styled.p`
 `;
 
 export const WorkComponent: React.FC<WorkComponentProps> = ({
-  id,
   name,
   type,
   delay,
