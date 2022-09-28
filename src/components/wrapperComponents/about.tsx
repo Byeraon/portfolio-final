@@ -34,6 +34,7 @@ const ResumeText = styled.p`
   opacity: 0;
   display: block;
   text-align: left;
+
   &:nth-child(1) {
     font-size: 4em;
     @media screen and (max-width: 580px) {
@@ -52,6 +53,7 @@ const ResumeText = styled.p`
       }
     }
   }
+
   &:nth-child(2) {
     font-size: 2.8em;
     animation-delay: 0.3s;
@@ -91,6 +93,7 @@ const ResumeText = styled.p`
       }
     }
   }
+
   &:nth-child(3) a {
     cursor: pointer;
     text-decoration: none;
@@ -100,15 +103,19 @@ const ResumeText = styled.p`
   &:nth-child(3) a:nth-child(2):hover {
     color: #a8a8a8;
   }
+
   &:nth-child(3) a:nth-child(3):hover {
     color: rgb(235, 76, 137);
   }
+
   &:nth-child(3) a:nth-child(4):hover {
     color: rgb(93, 151, 243);
   }
+
   & a {
     color: white;
   }
+
   margin-bottom: 20px;
   @keyframes bottomText {
     from {
@@ -136,7 +143,7 @@ export const About: React.FC = () => {
             }}
           >
             <ResumeText>
-              I'm Nikita, react developer who loves bringing design and code
+              I am Nikita, react developer who loves bringing design and code
               together to create intuitive solutions for complicated problems.
               Thank you very much for coming to this page :3
             </ResumeText>

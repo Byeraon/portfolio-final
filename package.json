@@ -3,17 +3,23 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "lint": "eslint src/**/*.ts",
     "lint-fix": "eslint --fix src/**/*.ts",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "lint-staged": "lint-staged",
     "pretty": "prettier --write 'src/**/*.ts'",
     "eject": "react-scripts eject",
-    "prepare": "husky install",
     "precommit": "npm run lint-fix && npm run pretty",
-    "prepush": "npm run lint"
+    "prepush": "npm run lint",
+    "lint": "eslint --ext .tsx --ext .ts src/",
+    "format": "prettier --check ./src",
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint . --fix --max-warnings=0 --ignore-pattern '!.prettierrc.js'",
+      "prettier --write"
+    ]
   },
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.2",
@@ -58,7 +64,9 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.31.8",
-    "husky": "^8.0.0",
+    "husky": "^8.0.1",
+    "jest": "27.5.1",
+    "lint-staged": "^13.0.3",
     "prettier": "^2.7.1"
   }
 }

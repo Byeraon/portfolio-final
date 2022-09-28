@@ -40,20 +40,22 @@ const CloseButton = styled.button`
   }
 `;
 
+const getThemeType = (theme: any) => {
+  if (theme === "about") {
+    return "width: 100%; height: 0%; animation: fromTop .5s linear forwards;";
+  } else if (theme === "skills") {
+    return "left: 0; height: 100%; animation: fromLeft .5s linear forwards; background: #000000;";
+  }
+  return "right: 0; height: 100%; animation: fromLeft .5s linear forwards;";
+};
+
 const WrapperStyles = styled.div`
   z-index: 2;
   top: 0;
   transition: 0.4s all;
   position: absolute;
   background-color: #00000099;
-  ${(props) => {
-    return props.theme === "about"
-      ? "width: 100%; height: 0%; animation: fromTop .5s linear forwards;"
-      : props.theme === "skills"
-      ? "left: 0; height: 100%; animation: fromLeft .5s linear forwards; background: #000000;"
-      : "right: 0; height: 100%; animation: fromLeft .5s linear forwards;";
-  }}
-
+  ${(props) => getThemeType(props.theme)};
   @keyframes fromLeft {
     from {
       width: 0%;
@@ -62,10 +64,12 @@ const WrapperStyles = styled.div`
       width: 100%;
     }
   }
+  ,
   @keyframes fromTop {
     from {
       height: 0%;
     }
+
     to {
       height: 100%;
     }
@@ -82,6 +86,16 @@ export const BlockWrapper: React.FC<BlockWrapperInterface> = ({ route }) => {
       document.body.style.cursor = "inherit";
     };
   }, []);
+
+  const getWrapper = (localRoute: string | undefined) => {
+    if (localRoute === "about") {
+      return <About />;
+    } else if (localRoute === "skills") {
+      return <Skills />;
+    }
+    return <Works />;
+  };
+
   return (
     <WrapperStyles
       onAnimationEnd={() => setEnd(true)}
@@ -100,17 +114,7 @@ export const BlockWrapper: React.FC<BlockWrapperInterface> = ({ route }) => {
       }
       theme={route}
     >
-      {animationEnd ? (
-        route === "about" ? (
-          <About />
-        ) : route === "skills" ? (
-          <Skills />
-        ) : (
-          <Works />
-        )
-      ) : (
-        <></>
-      )}
+      {animationEnd && getWrapper(route)}
       <CloseButton
         onClick={() => {
           setClose(true);
