@@ -1,13 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import { BlockWrapper } from "./components/blockwrapper";
 import { Provider } from "./components/context/cursorContext";
 import { Menu } from "./components/menu";
 import { PhotoWrapper } from "./components/photowrapper";
+import { initAxiosInstance } from "./core/services/api";
 
 function App() {
   const [cursorTransition, setCursor] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    initAxiosInstance();
+  }, []);
 
   const onMouseMove = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     if (window.innerWidth > 767) {

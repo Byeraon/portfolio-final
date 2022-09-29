@@ -5,7 +5,7 @@ import bottle from "../../images/bottle.png";
 interface BottleProps {
   id: number;
   name: string;
-  waterColor: string;
+  waterColor: any;
   percent: number;
   delay: number;
 }
@@ -72,6 +72,7 @@ const BottleWater = styled.div`
       opacity: 1;
     }
   }
+
   ${(props) => {
     return `background-image: url(${props.theme.waterColor}); animation-delay: ${props.theme.delay}s;`;
   }}
@@ -87,6 +88,7 @@ const BottleWater = styled.div`
       }
     }}
   }
+
   &:hover p {
     ${(props) => {
       if (props.theme.bottleShowed) {
@@ -94,6 +96,7 @@ const BottleWater = styled.div`
       }
     }}
   }
+
   @media screen and (max-width: 1000px) {
     margin-bottom: 200px;
   }

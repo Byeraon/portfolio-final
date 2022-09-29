@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { About } from "./wrapperComponents/about";
@@ -54,7 +54,7 @@ const WrapperStyles = styled.div`
   top: 0;
   transition: 0.4s all;
   position: absolute;
-  background-color: #00000099;
+  background-color: #000000;
   ${(props) => getThemeType(props.theme)};
   @keyframes fromLeft {
     from {
@@ -64,7 +64,6 @@ const WrapperStyles = styled.div`
       width: 100%;
     }
   }
-  ,
   @keyframes fromTop {
     from {
       height: 0%;
@@ -87,14 +86,14 @@ export const BlockWrapper: React.FC<BlockWrapperInterface> = ({ route }) => {
     };
   }, []);
 
-  const getWrapper = (localRoute: string | undefined) => {
-    if (localRoute === "about") {
+  const getWrapper = useMemo(() => {
+    if (route === "about") {
       return <About />;
-    } else if (localRoute === "skills") {
+    } else if (route === "skills") {
       return <Skills />;
     }
     return <Works />;
-  };
+  }, [route]);
 
   return (
     <WrapperStyles
@@ -114,7 +113,7 @@ export const BlockWrapper: React.FC<BlockWrapperInterface> = ({ route }) => {
       }
       theme={route}
     >
-      {animationEnd && getWrapper(route)}
+      {animationEnd && getWrapper}
       <CloseButton
         onClick={() => {
           setClose(true);

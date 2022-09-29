@@ -1,12 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 import { InnerWrapper } from "./generalWrapper";
-import blue from "../../images/blueWater.png";
-import gray from "../../images/grayWater.png";
-import yellow from "../../images/yellowWater.png";
-import pink from "../../images/pinkWater.png";
+import Blue from "../../images/blueWater.png";
+import Gray from "../../images/grayWater.png";
+import Yellow from "../../images/yellowWater.png";
+import Pink from "../../images/pinkWater.png";
 import { Bottle } from "../UI Kit/bottle";
 import { CursorContext } from "../context/cursorContext";
+import { useGetSkillsListQuery } from "../../core/store/skills";
+import { Ripple } from "react-preloaders2";
 
 const SkillsWrapper = styled(InnerWrapper)`
   box-sizing: border-box;
@@ -24,13 +26,17 @@ const SkillsWrapper = styled(InnerWrapper)`
   }
 `;
 
+const colorConnect: Record<string, any> = {
+  blue: Blue,
+  pink: Pink,
+  yellow: Yellow,
+  gray: Gray,
+};
+
 export const Skills: React.FC = () => {
-  const myTechs = [
-    { id: 0, name: "React / Redux", percent: 75, waterColor: blue },
-    { id: 1, name: "Styled Components / SCSS", percent: 80, waterColor: pink },
-    { id: 2, name: "JS / TS", percent: 65, waterColor: yellow },
-    { id: 3, name: "GIT", percent: 80, waterColor: gray },
-  ];
+  const { data } = useGetSkillsListQuery({});
+
+  const techs = data ? data : [];
 
   return (
     <CursorContext.Consumer>
@@ -42,16 +48,22 @@ export const Skills: React.FC = () => {
               transform: `translate(${cursorTransition.x}px, ${cursorTransition.y}px)`,
             }}
           >
-            {myTechs.map((el) => (
-              <Bottle
-                delay={el.id / 3}
-                key={el.id}
-                id={el.id}
-                name={el.name}
-                percent={el.percent}
-                waterColor={el.waterColor}
-              />
-            ))}
+            <>
+              {techs.length === 0 ? (
+                <Ripple color="white" background="transparent" />
+              ) : (
+                techs.map((el) => (
+                  <Bottle
+                    delay={el.id / 3}
+                    key={el.id}
+                    id={el.id}
+                    name={el.name}
+                    percent={el.percent}
+                    waterColor={colorConnect[el.color]}
+                  />
+                ))
+              )}
+            </>
           </SkillsWrapper>
         );
       }}
