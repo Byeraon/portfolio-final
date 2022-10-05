@@ -108,6 +108,7 @@ export const BlockWrapper: React.FC<BlockWrapperInterface> = ({ route }) => {
         window.innerWidth > 767
           ? () => {
               setClose(true);
+              setEnd(false);
             }
           : () => {}
       }
