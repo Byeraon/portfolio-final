@@ -99,7 +99,7 @@ export const BlockWrapper: React.FC<BlockWrapperInterface> = ({ route }) => {
     <WrapperStyles
       onAnimationEnd={() => setEnd(true)}
       onTransitionEnd={(event) => {
-        if (event.propertyName === "opacity") {
+        if (event.propertyName === "opacity" && !animationEnd) {
           navigate("/");
         }
       }}
@@ -116,6 +116,7 @@ export const BlockWrapper: React.FC<BlockWrapperInterface> = ({ route }) => {
       {animationEnd && getWrapper}
       <CloseButton
         onClick={() => {
+          setEnd(false);
           setClose(true);
         }}
       ></CloseButton>
