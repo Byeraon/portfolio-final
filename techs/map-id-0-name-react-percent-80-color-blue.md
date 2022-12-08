@@ -1,6 +1,6 @@
 ---
 id: "0"
-name: React
+name: React / Redux
 percent: "80"
 color: blue
 ---
