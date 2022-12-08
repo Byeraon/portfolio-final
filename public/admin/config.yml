@@ -1,0 +1,19 @@
+backend:
+  name: git-gateway
+  branch: master # Branch to update (optional; defaults to master)
+
+# These lines should *not* be indented
+media_folder: "public/images"
+public_folder: "/images"
+
+collections:
+  - name: "techs" # Used in routes, e.g., /admin/collections/blog
+    label: "Techs" # Used in the UI
+    folder: "techs" # The path to the folder where the documents are stored
+    create: true # Allow users to create new documents in this collection
+    slug: "{{slug}}" # Filename template, e.g., YYYY-MM-DD-title.md
+    fields: # The fields for each document, usually in front matter
+      - { label: "Id", name: "id", widget: "string" }
+      - { label: "Name", name: "name", widget: "string" }
+      - { label: "Percent", name: "percent", widget: "string" }
+      - { label: "Color", name: "color", widget: "string" }
