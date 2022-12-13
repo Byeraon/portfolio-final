@@ -7,8 +7,8 @@ import Yellow from "../../images/yellowWater.png";
 import Pink from "../../images/pinkWater.png";
 import { Bottle } from "../UI Kit/bottle";
 import { CursorContext } from "../context/cursorContext";
-import { useGetSkillsListQuery } from "../../core/store/skills";
 import { Ripple } from "react-preloaders2";
+import techs from "../../techs.json";
 
 const SkillsWrapper = styled(InnerWrapper)`
   box-sizing: border-box;
@@ -34,10 +34,6 @@ const colorConnect: Record<string, any> = {
 };
 
 export const Skills: React.FC = () => {
-  const { data } = useGetSkillsListQuery({});
-
-  const techs = data ? data : [];
-
   return (
     <CursorContext.Consumer>
       {(value) => {
@@ -54,11 +50,11 @@ export const Skills: React.FC = () => {
               ) : (
                 techs.map((el) => (
                   <Bottle
-                    delay={el.id / 3}
+                    delay={Number(el.id) / 3}
                     key={el.id}
-                    id={el.id}
+                    id={Number(el.id)}
                     name={el.name}
-                    percent={el.percent}
+                    percent={Number(el.percent)}
                     waterColor={colorConnect[el.color]}
                   />
                 ))

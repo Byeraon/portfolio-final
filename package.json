@@ -5,7 +5,7 @@
   "scripts": {
     "lint-fix": "eslint --fix src/**/*.ts",
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "node public/main.js && react-scripts build",
     "test": "react-scripts test",
     "pretty": "prettier --write 'src/**/*.ts'",
     "eject": "react-scripts eject",
