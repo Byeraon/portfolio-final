@@ -13,7 +13,7 @@ collections:
     create: true # Allow users to create new documents in this collection
     slug: "{{slug}}" # Filename template, e.g., YYYY-MM-DD-title.md
     fields: # The fields for each document, usually in front matter
-      - { label: "Id", name: "id", widget: "string" }
+      - { label: "Id", name: "id", widget: "number" }
       - { label: "Name", name: "name", widget: "string" }
-      - { label: "Percent", name: "percent", widget: "string" }
+      - { label: "Percent", name: "percent", widget: "number" }
       - { label: "Color", name: "color", widget: "string" }

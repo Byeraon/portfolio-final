@@ -13,6 +13,7 @@
     "prepush": "npm run lint",
     "lint": "eslint --ext .tsx --ext .ts src/",
     "format": "prettier --check ./src",
+    "server": "node public/main.js",
     "prepare": "husky install"
   },
   "lint-staged": {
